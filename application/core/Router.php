@@ -42,11 +42,17 @@ class Router //
     {
         //Сдесь подуключаем контроллеры а в нем уже потом будем вызывать методы
         if ($this->math()) {
-            $controllers = 'application\controllers\\' . ucfirst($this->params['controller']) . 'Controllers.php';
-            if (class_exists($controllers)) {
-                echo 'jr';
+            $path = 'application\controllers\\' . ucfirst($this->params['controller']) . 'Controller';
+            if (class_exists($path)) {
+                $action = $this->params['action'] . 'Action';
+                if (method_exists($path, $action)) {
+                    $controller = new $path($this->params);
+                    $controller->$action();
+                } else {
+                    echo 'не найден ' . $action;
+                }
             } else {
-                echo 'не найден ' . $controllers;
+                echo 'не найден ' . $path;
             }
         } else {
             echo 'маршрут не найден';
