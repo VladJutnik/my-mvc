@@ -8,7 +8,7 @@ class AccountController extends Controller
 {
     public function loginAction()
     {
-        $this->view->render('Вход');
+        $this->view->redirect('/main/index');
     }
 
     public function registerAction()

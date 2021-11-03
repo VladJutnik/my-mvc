@@ -13,7 +13,7 @@ class View
         $this->route = $route;
         $this->path = $route['controller'] . '/' . $route['action'];
     }
-
+    //загрузка наших представлений
     public function render($title, $vars = [])
     {
         //вставляем в переменную $content
@@ -25,5 +25,20 @@ class View
             $content = ob_get_clean();//ob_get_clean - Получает содержимое текущего буфера и затем удаляет текущий буфер.
             require 'application/views/layouts/'.$this->layout.'.php';
         }
+    }
+
+    public function redirect($url){
+        header('loction: '.$url);
+        exit();
+    }
+
+    //вывод ошибок!
+    public static function erroreCode($code) {
+        http_response_code($code);
+        $path = 'application/views/errore/'.$code.'.php';
+        if (file_exists($path)) {
+            require $path;
+        }
+        exit;
     }
 }
