@@ -8,13 +8,11 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        echo 'Страница главная';
-        var_dump($this->route);
+       $this->view->render('Главная страница');
     }
 
     public function contactAction()
     {
-        echo 'Страница c контактами';
-        var_dump($this->route);
+        $this->view->render('Контакты');
     }
 }
